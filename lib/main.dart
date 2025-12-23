@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/features/onboarding/home/home_screen.dart';
 import 'package:news_app/features/onboarding/onboarding_screen.dart';
 
 import 'core/theme/light_theme.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
-      home: OnboardingScreen(),
+      home: HomeScreen(),
     );
   }
 }
