@@ -25,6 +25,7 @@ dependencies:
     firebase_auth: ^4.5.0
     google_sign_in: ^6.1.0
     google_fonts: ^4.0.4
+    flutter_svg: ^2.2.0
 dev_dependencies:
     flutter_test:
         sdk: flutter
@@ -33,3 +34,4 @@ flutter:
     uses-material-design: true
     assets:
         - assets/images/
+        - assets/icons/

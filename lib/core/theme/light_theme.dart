@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/theme/light_colors.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
@@ -7,14 +8,21 @@ ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: Color(0xfff5f5f5),
 
   textButtonTheme: TextButtonThemeData(
-    style: TextButton.styleFrom(foregroundColor: Color(0xffC53030)),
+    style: TextButton.styleFrom(foregroundColor: LightColors.primaryColor),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Color(0xffC53030),
+      backgroundColor: LightColors.primaryColor,
       foregroundColor: Color(0xfff5f5f5),
       textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
     ),
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    type: BottomNavigationBarType.fixed,
+    backgroundColor: LightColors.backgroundColor,
+    selectedItemColor: LightColors.primaryColor,
+    unselectedItemColor: LightColors.unselectedItemColor,
+    showUnselectedLabels: true,
   ),
 );
