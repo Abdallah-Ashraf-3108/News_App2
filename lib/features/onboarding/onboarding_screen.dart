@@ -4,7 +4,8 @@ import 'package:news_app/features/onboarding/models/onboarding_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/datasource/local_data/preference_manager.dart';
-import '../login/login_screen.dart';
+import '../../core/widgets/custom_elevated_button.dart';
+import '../auth/login_screen.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -131,7 +132,8 @@ class OnboardingScreen extends StatelessWidget {
 
                 Consumer<OnboardingController>(
                   builder: (BuildContext context, value, Widget? child) {
-                    return ElevatedButton(
+                    return CustomElevatedButton(
+                      text: value.isLastPage ? 'Get Started' : 'Next',
                       onPressed: () {
                         if (!value.isLastPage) {
                           controller.onNext();
@@ -139,11 +141,20 @@ class OnboardingScreen extends StatelessWidget {
                           _onFinish(context);
                         }
                       },
-                      style: ElevatedButton.styleFrom(
-                        fixedSize: Size(MediaQuery.of(context).size.width, 48),
-                      ),
-                      child: Text(value.isLastPage ? 'Get Started' : 'Next'),
                     );
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     if (!value.isLastPage) {
+                    //       controller.onNext();
+                    //     } else {
+                    //       _onFinish(context);
+                    //     }
+                    //   },
+                    //   style: ElevatedButton.styleFrom(
+                    //     fixedSize: Size(MediaQuery.of(context).size.width, 48),
+                    //   ),
+                    //   child: Text(value.isLastPage ? 'Get Started' : 'Next'),
+                    // );
                   },
                 ),
               ],

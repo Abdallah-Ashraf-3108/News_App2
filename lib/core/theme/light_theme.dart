@@ -25,4 +25,15 @@ ThemeData lightTheme = ThemeData(
     unselectedItemColor: LightColors.unselectedItemColor,
     showUnselectedLabels: true,
   ),
+
+  inputDecorationTheme: InputDecorationTheme(
+    contentPadding: EdgeInsets.all(16),
+
+    hintStyle: TextStyle(
+      fontWeight: FontWeight.w400,
+      fontSize: 12,
+      color: LightColors.unselectedItemColor,
+    ),
+    border: InputBorder.none,
+  ),
 );
