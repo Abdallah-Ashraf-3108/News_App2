@@ -5,7 +5,7 @@ import 'package:news_app/features/auth/register_screen.dart';
 
 import '../../core/widgets/custom_elevated_button.dart';
 import '../../core/widgets/custom_text_form_field.dart';
-import '../home/home_screen.dart';
+import '../main/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -32,22 +32,31 @@ class _LoginScreenState extends State<LoginScreen> {
     await Future.delayed(Duration(seconds: 3));
     final savedEmail = PreferencesManager().getString('user_email');
     final savedPassword = PreferencesManager().getString('user_password');
-    if (savedEmail != null &&
-        savedPassword != null &&
-        savedEmail == emailController.text.trim() &&
-        savedPassword == passwordController.text.trim()) {
+    if (savedEmail == null || savedPassword == null) {
+      setState(() {
+        errorMessage = "No Account Found, Please Register First";
+        isLoading = false;
+      });
+      return;
+    }
+    if (savedEmail != emailController.text.trim() ||
+        savedPassword != passwordController.text.trim()) {
+      setState(() {
+        errorMessage = "Incorrect Email or Password";
+        isLoading = false;
+      });
+      return;
+    } else {
       await PreferencesManager().setBool('is_logged_in', true);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return HomeScreen();
+            return MainScreen();
           },
         ),
       );
-    } else {
       setState(() {
-        errorMessage = "This Email or Password is incorrect";
         isLoading = false;
       });
     }

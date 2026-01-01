@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/features/auth/login_screen.dart';
-import 'package:news_app/features/home/home_screen.dart';
 import 'package:news_app/features/onboarding/onboarding_screen.dart';
 
 import '../../core/datasource/local_data/preference_manager.dart';
+import '../main/main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
           },
         ),
       );
-    } else if (isLoggedIn) {
+    } else if (!isLoggedIn) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return HomeScreen();
+            return MainScreen();
           },
         ),
       );

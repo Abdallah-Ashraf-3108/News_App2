@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/theme/light_colors.dart';
-import 'package:news_app/features/home/home_screen.dart';
 
 import '../../core/datasource/local_data/preference_manager.dart';
 import '../../core/widgets/custom_elevated_button.dart';
 import '../../core/widgets/custom_text_form_field.dart';
+import '../main/main_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -52,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return HomeScreen();
+            return MainScreen();
           },
         ),
       );
