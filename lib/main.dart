@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/datasource/local_data/preference_manager.dart';
-import 'package:news_app/features/auth/login_screen.dart';
+import 'package:news_app/features/splash/splash_screen.dart';
 
 import 'core/theme/light_theme.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }
