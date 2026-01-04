@@ -25,31 +25,30 @@ class HomeController extends ChangeNotifier {
       );
 
       newsTopHeadlinesList =
-          (result["articles"] as List)
-              .map((e) => NewsArticleModel.fromJson(e))
-              .toList();
+          (result["articles"] as List).map((e) => NewsArticleModel.fromJson(e)).toList();
       topHeadlinesLoading = false;
       errorMessage = null;
     } catch (e) {
-      topHeadlinesLoading = false;
       errorMessage = e.toString();
+      topHeadlinesLoading = false;
     }
     notifyListeners();
   }
 
   void getEverything() async {
     try {
-      Map<String, dynamic> result = await apiService.get(ApiConfig.everything);
+      Map<String, dynamic> result = await apiService.get(
+        ApiConfig.everything,
+        params: {"q": "news", "sortBy": "publishedAt"},
+      );
 
       newsEverythingList =
-          (result["articles"] as List)
-              .map((e) => NewsArticleModel.fromJson(e))
-              .toList();
+          (result["articles"] as List).map((e) => NewsArticleModel.fromJson(e)).toList();
       everythingLoading = false;
       errorMessage = null;
     } catch (e) {
-      everythingLoading = false;
       errorMessage = e.toString();
+      everythingLoading = false;
     }
     notifyListeners();
   }
