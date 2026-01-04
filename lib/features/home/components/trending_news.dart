@@ -66,45 +66,91 @@ class TrendingNews extends StatelessWidget {
                           return ListView.separated(
                             padding: EdgeInsets.only(left: 16),
                             scrollDirection: Axis.horizontal,
-                            itemCount: controller.newsEverythingList.length,
+                            itemCount: controller.newsEverythingList.take(10).length,
                             separatorBuilder: (BuildContext context, int index) => SizedBox(width: 12),
                             itemBuilder: (BuildContext context, int index) {
-                              return ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Stack(
-                                  children: [
-                                    if (controller.newsEverythingList[index].urlToImage != null)
-                                      Image.network(
-                                        width: 240,
-                                        height: 140,
-                                        controller.newsEverythingList[index].urlToImage ?? '',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    Positioned.fill(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                              Colors.black.withValues(alpha: 0.1),
-                                              Colors.black.withValues(alpha: 0.9),
-                                            ],
+                              final modelEverything = controller.newsEverythingList[index];
+                              return SizedBox(
+                                width: 240,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Stack(
+                                    children: [
+                                      if (modelEverything.urlToImage != null)
+                                        Image.network(
+                                          width: 240,
+                                          height: 140,
+                                          modelEverything.urlToImage ?? '',
+                                          fit: BoxFit.cover,
+                                        ),
+                                      Positioned.fill(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              colors: [
+                                                Colors.black.withValues(alpha: 0.1),
+                                                Colors.black.withValues(alpha: 0.9),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    // Text(
-                                    //   controller.newsEverythingList[index].title!,
-                                    //   maxLines: 1,
-                                    //   overflow: TextOverflow.ellipsis,
-                                    //   style: TextStyle(
-                                    //     fontSize: 16,
-                                    //     fontWeight: FontWeight.w700,
-                                    //     color: LightColors.backgroundColor,
-                                    //   ),
-                                    // ),
-                                  ],
+                                      Positioned(
+                                        bottom: 12,
+                                        right: 12,
+                                        left: 12,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              modelEverything.title!,
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w700,
+                                                color: LightColors.backgroundColor,
+                                              ),
+                                            ),
+                                            SizedBox(height: 4),
+                                            Row(
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 10,
+                                                  backgroundImage: NetworkImage(modelEverything.urlToImage ?? ""),
+                                                ),
+                                                SizedBox(width: 6),
+                                                Expanded(
+                                                  child: Text(
+                                                    modelEverything.author ?? "",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight: FontWeight.w400,
+                                                      color: LightColors.backgroundColor,
+                                                    ),
+                                                    maxLines: 1,
+                                                  ),
+                                                ),
+                                                Spacer(),
+                                                Text(
+                                                  formatDateTime(modelEverything.publishedAt),
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: LightColors.backgroundColor,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             },
@@ -119,5 +165,14 @@ class TrendingNews extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String formatDateTime(String? date) {
+    if (date == null) return "";
+    final diff = DateTime.now().difference(DateTime.parse(date));
+    if (diff.inMinutes < 60) return "${diff.inMinutes}m ago";
+    if (diff.inHours < 24) return "${diff.inHours}h ago";
+
+    return "${diff.inDays}d ago";
   }
 }
