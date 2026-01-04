@@ -55,6 +55,7 @@ class TrendingNews extends StatelessWidget {
                 SizedBox(height: 8),
                 SizedBox(
                   height: 140,
+
                   child: Consumer<HomeController>(
                     builder: (BuildContext context, HomeController controller, Widget? child) {
                       switch (controller.everythingStatus) {
