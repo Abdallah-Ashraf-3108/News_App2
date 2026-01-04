@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../../core/datasource/remote_data/api_config.dart';
 import '../../../core/datasource/remote_data/api_service.dart';
+import '../../../core/enums/request_status_enum.dart';
 import '../models/news_article_model.dart';
 
 class HomeController extends ChangeNotifier {
@@ -10,27 +11,24 @@ class HomeController extends ChangeNotifier {
     getEverything();
   }
 
+  RequestStatusEnum everythingStatus = RequestStatusEnum.loading;
+  RequestStatusEnum topHeadlinesStatus = RequestStatusEnum.loading;
+
   List<NewsArticleModel> newsTopHeadlinesList = [];
   List<NewsArticleModel> newsEverythingList = [];
   ApiService apiService = ApiService();
-  bool topHeadlinesLoading = true;
-  bool everythingLoading = true;
   String? errorMessage;
 
   void getTopHeadlines() async {
     try {
-      Map<String, dynamic> result = await apiService.get(
-        ApiConfig.topHeadlines,
-        params: {"country": "us"},
-      );
+      Map<String, dynamic> result = await apiService.get(ApiConfig.topHeadlines, params: {"country": "us"});
 
-      newsTopHeadlinesList =
-          (result["articles"] as List).map((e) => NewsArticleModel.fromJson(e)).toList();
-      topHeadlinesLoading = false;
+      newsTopHeadlinesList = (result["articles"] as List).map((e) => NewsArticleModel.fromJson(e)).toList();
+      topHeadlinesStatus = RequestStatusEnum.loaded;
       errorMessage = null;
     } catch (e) {
       errorMessage = e.toString();
-      topHeadlinesLoading = false;
+      topHeadlinesStatus = RequestStatusEnum.error;
     }
     notifyListeners();
   }
@@ -42,13 +40,12 @@ class HomeController extends ChangeNotifier {
         params: {"q": "news", "sortBy": "publishedAt"},
       );
 
-      newsEverythingList =
-          (result["articles"] as List).map((e) => NewsArticleModel.fromJson(e)).toList();
-      everythingLoading = false;
+      newsEverythingList = (result["articles"] as List).map((e) => NewsArticleModel.fromJson(e)).toList();
+      everythingStatus = RequestStatusEnum.loaded;
       errorMessage = null;
     } catch (e) {
       errorMessage = e.toString();
-      everythingLoading = false;
+      everythingStatus = RequestStatusEnum.error;
     }
     notifyListeners();
   }

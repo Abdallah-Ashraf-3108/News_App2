@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/enums/request_status_enum.dart';
 import 'package:news_app/features/home/controller/home_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -56,11 +57,13 @@ class TrendingNews extends StatelessWidget {
                   height: 140,
                   child: Consumer<HomeController>(
                     builder: (BuildContext context, HomeController controller, Widget? child) {
-                      return (controller.errorMessage?.isNotEmpty ?? false)
-                          ? Center(child: Text(controller.errorMessage!))
-                          : controller.everythingLoading
-                          ? const Center(child: CircularProgressIndicator())
-                          : ListView.separated(
+                      switch (controller.everythingStatus) {
+                        case RequestStatusEnum.loading:
+                          return const Center(child: CircularProgressIndicator());
+                        case RequestStatusEnum.error:
+                          return Center(child: Text(controller.errorMessage!));
+                        case RequestStatusEnum.loaded:
+                          return ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: controller.newsEverythingList.length,
                             separatorBuilder: (BuildContext context, int index) {
@@ -91,6 +94,7 @@ class TrendingNews extends StatelessWidget {
                               );
                             },
                           );
+                      }
                     },
                   ),
                 ),
