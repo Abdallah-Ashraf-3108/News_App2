@@ -64,11 +64,10 @@ class TrendingNews extends StatelessWidget {
                           return Center(child: Text(controller.errorMessage!));
                         case RequestStatusEnum.loaded:
                           return ListView.separated(
+                            padding: EdgeInsets.only(left: 16),
                             scrollDirection: Axis.horizontal,
                             itemCount: controller.newsEverythingList.length,
-                            separatorBuilder: (BuildContext context, int index) {
-                              return const SizedBox(width: 12);
-                            },
+                            separatorBuilder: (BuildContext context, int index) => SizedBox(width: 12),
                             itemBuilder: (BuildContext context, int index) {
                               return ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
@@ -76,9 +75,25 @@ class TrendingNews extends StatelessWidget {
                                   children: [
                                     if (controller.newsEverythingList[index].urlToImage != null)
                                       Image.network(
+                                        width: 240,
+                                        height: 140,
                                         controller.newsEverythingList[index].urlToImage ?? '',
                                         fit: BoxFit.cover,
                                       ),
+                                    Positioned.fill(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            colors: [
+                                              Colors.black.withValues(alpha: 0.1),
+                                              Colors.black.withValues(alpha: 0.9),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                     // Text(
                                     //   controller.newsEverythingList[index].title!,
                                     //   maxLines: 1,
