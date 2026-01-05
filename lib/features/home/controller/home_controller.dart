@@ -19,11 +19,19 @@ class HomeController extends ChangeNotifier {
   ApiService apiService = ApiService();
   String? errorMessage;
 
-  void getTopHeadlines() async {
-    try {
-      Map<String, dynamic> result = await apiService.get(ApiConfig.topHeadlines, params: {"country": "us"});
+  String? selectedCategory;
 
-      newsTopHeadlinesList = (result["articles"] as List).map((e) => NewsArticleModel.fromJson(e)).toList();
+  void getTopHeadlines({String? category}) async {
+    try {
+      Map<String, dynamic> result = await apiService.get(
+        ApiConfig.topHeadlines,
+        params: {"country": "us", "category": selectedCategory},
+      );
+
+      newsTopHeadlinesList =
+          (result["articles"] as List)
+              .map((e) => NewsArticleModel.fromJson(e))
+              .toList();
       topHeadlinesStatus = RequestStatusEnum.loaded;
       errorMessage = null;
     } catch (e) {
@@ -40,13 +48,22 @@ class HomeController extends ChangeNotifier {
         params: {"q": "news", "sortBy": "publishedAt"},
       );
 
-      newsEverythingList = (result["articles"] as List).map((e) => NewsArticleModel.fromJson(e)).toList();
+      newsEverythingList =
+          (result["articles"] as List)
+              .map((e) => NewsArticleModel.fromJson(e))
+              .toList();
       everythingStatus = RequestStatusEnum.loaded;
       errorMessage = null;
     } catch (e) {
       errorMessage = e.toString();
       everythingStatus = RequestStatusEnum.error;
     }
+    notifyListeners();
+  }
+
+  void updateSelectedCategory(String category) {
+    selectedCategory = category;
+    getTopHeadlines(category: selectedCategory);
     notifyListeners();
   }
 }
