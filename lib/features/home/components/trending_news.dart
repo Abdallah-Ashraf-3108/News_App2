@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/enums/request_status_enum.dart';
+import 'package:news_app/core/widgets/custom_cached_network_image.dart';
+import 'package:news_app/features/home/components/trending_news_shimmer.dart';
 import 'package:news_app/features/home/components/view_all_component.dart';
 import 'package:news_app/features/home/controller/home_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../core/theme/light_colors.dart';
 
@@ -27,7 +30,11 @@ class TrendingNews extends StatelessWidget {
                 children: [
                   Text(
                     'NEWST',
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600, color: LightColors.primaryColor),
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w600,
+                      color: LightColors.primaryColor,
+                    ),
                   ),
                   SizedBox(height: 14),
                   ViewAllComponent(title: "Trending News", onTap: () {}),
@@ -39,7 +46,7 @@ class TrendingNews extends StatelessWidget {
                       builder: (BuildContext context, HomeController controller, Widget? child) {
                         switch (controller.everythingStatus) {
                           case RequestStatusEnum.loading:
-                            return const Center(child: CircularProgressIndicator());
+                            return TrendingNewsShimmer();
                           case RequestStatusEnum.error:
                             return Center(child: Text(controller.errorMessage!));
                           case RequestStatusEnum.loaded:
@@ -47,7 +54,8 @@ class TrendingNews extends StatelessWidget {
                               padding: EdgeInsets.only(left: 16),
                               scrollDirection: Axis.horizontal,
                               itemCount: controller.newsEverythingList.take(10).length,
-                              separatorBuilder: (BuildContext context, int index) => SizedBox(width: 12),
+                              separatorBuilder:
+                                  (BuildContext context, int index) => SizedBox(width: 12),
                               itemBuilder: (BuildContext context, int index) {
                                 final modelEverything = controller.newsEverythingList[index];
                                 return SizedBox(
@@ -56,13 +64,11 @@ class TrendingNews extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(12),
                                     child: Stack(
                                       children: [
-                                        if (modelEverything.urlToImage != null)
-                                          Image.network(
-                                            width: 240,
-                                            height: 140,
-                                            modelEverything.urlToImage ?? '',
-                                            fit: BoxFit.fill,
-                                          ),
+                                        CustomCachedNetworkImage(
+                                          imagePath: modelEverything.urlToImage ?? "",
+                                          width: 240,
+                                          height: 140,
+                                        ),
                                         Positioned.fill(
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -101,7 +107,9 @@ class TrendingNews extends StatelessWidget {
                                                 children: [
                                                   CircleAvatar(
                                                     radius: 10,
-                                                    backgroundImage: NetworkImage(modelEverything.urlToImage ?? ""),
+                                                    backgroundImage: NetworkImage(
+                                                      modelEverything.urlToImage ?? "",
+                                                    ),
                                                   ),
                                                   SizedBox(width: 6),
                                                   Expanded(

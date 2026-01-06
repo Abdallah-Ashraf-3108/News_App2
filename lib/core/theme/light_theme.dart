@@ -6,8 +6,14 @@ ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   colorScheme: ColorScheme.light(),
   scaffoldBackgroundColor: Color(0xfff5f5f5),
+  appBarTheme: AppBarThemeData(
+    backgroundColor: Colors.white,
+    titleTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF141414)),
+  ),
 
-  textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(foregroundColor: LightColors.primaryColor)),
+  textButtonTheme: TextButtonThemeData(
+    style: TextButton.styleFrom(foregroundColor: LightColors.primaryColor),
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: LightColors.primaryColor,
@@ -27,7 +33,11 @@ ThemeData lightTheme = ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     contentPadding: EdgeInsets.all(16),
 
-    hintStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 12, color: LightColors.unselectedItemColor),
+    hintStyle: TextStyle(
+      fontWeight: FontWeight.w400,
+      fontSize: 12,
+      color: LightColors.unselectedItemColor,
+    ),
     border: InputBorder.none,
   ),
   progressIndicatorTheme: ProgressIndicatorThemeData(color: Colors.white),

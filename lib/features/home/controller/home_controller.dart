@@ -23,15 +23,15 @@ class HomeController extends ChangeNotifier {
 
   void getTopHeadlines({String? category}) async {
     try {
+      topHeadlinesStatus = RequestStatusEnum.loading;
+      notifyListeners();
       Map<String, dynamic> result = await apiService.get(
         ApiConfig.topHeadlines,
         params: {"country": "us", "category": selectedCategory},
       );
 
       newsTopHeadlinesList =
-          (result["articles"] as List)
-              .map((e) => NewsArticleModel.fromJson(e))
-              .toList();
+          (result["articles"] as List).map((e) => NewsArticleModel.fromJson(e)).toList();
       topHeadlinesStatus = RequestStatusEnum.loaded;
       errorMessage = null;
     } catch (e) {
@@ -49,9 +49,7 @@ class HomeController extends ChangeNotifier {
       );
 
       newsEverythingList =
-          (result["articles"] as List)
-              .map((e) => NewsArticleModel.fromJson(e))
-              .toList();
+          (result["articles"] as List).map((e) => NewsArticleModel.fromJson(e)).toList();
       everythingStatus = RequestStatusEnum.loaded;
       errorMessage = null;
     } catch (e) {
