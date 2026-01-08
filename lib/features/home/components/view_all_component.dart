@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 
 class ViewAllComponent extends StatelessWidget {
   const ViewAllComponent({
@@ -21,7 +22,7 @@ class ViewAllComponent extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: AppSizes.sp16,
               fontWeight: FontWeight.w700,
               color: titleColor ?? Color(0xFFFFFCFC),
             ),
@@ -32,7 +33,7 @@ class ViewAllComponent extends StatelessWidget {
             child: Text(
               'View all',
               style: TextStyle(
-                fontSize: 14,
+                fontSize: AppSizes.sp14,
                 fontWeight: FontWeight.w400,
                 color: titleColor ?? Color(0xFFFFFCFC),
                 decoration: TextDecoration.underline,

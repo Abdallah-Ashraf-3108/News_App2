@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/theme/light_colors.dart';
 
 import '../../core/datasource/local_data/preference_manager.dart';
@@ -71,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding:  EdgeInsets.all(AppSizes.r16),
           child: Form(
             key: _formKey,
             child: Column(
@@ -79,18 +80,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
-                  child: Image.asset('assets/images/logo.png', height: 45),
+                  child: Image.asset('assets/images/logo.png', height: AppSizes.h45),
                 ),
-                SizedBox(height: 24),
+                SizedBox(height: AppSizes.ph24),
                 Text(
                   'Welcome To Newst',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: AppSizes.sp20,
                     fontWeight: FontWeight.w700,
                     color: LightColors.unselectedItemColor,
                   ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: AppSizes.ph16),
                 CustomTextFormField(
                   controller: emailController,
                   hintText: 'abdoo@gmail.com',
@@ -108,7 +109,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: AppSizes.ph16),
                 CustomTextFormField(
                   controller: passwordController,
                   hintText: '*************',
@@ -143,13 +144,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       errorMessage!,
                       style: TextStyle(
                         color: Colors.red,
-                        fontSize: 16,
+                        fontSize: AppSizes.sp16,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
 
-                SizedBox(height: 20),
+                SizedBox(height: AppSizes.ph20),
                 isLoading
                     ? Center(child: CircularProgressIndicator())
                     : CustomElevatedButton(
@@ -160,19 +161,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         }
                       },
                     ),
-                SizedBox(height: 24),
+                SizedBox(height: AppSizes.ph24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'Have an account ?',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: AppSizes.sp14,
                         fontWeight: FontWeight.w400,
                         color: LightColors.textPrimaryColor,
                       ),
                     ),
-                    SizedBox(width: 8),
+                    SizedBox(width: AppSizes.pw8),
                     InkWell(
                       onTap: () {
                         Navigator.pop(context);
@@ -182,7 +183,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: TextStyle(
                           color: LightColors.primaryColor,
                           fontWeight: FontWeight.w400,
-                          fontSize: 14,
+                          fontSize: AppSizes.sp14,
                         ),
                       ),
                     ),

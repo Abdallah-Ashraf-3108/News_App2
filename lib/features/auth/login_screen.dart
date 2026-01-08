@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/datasource/local_data/preference_manager.dart';
 import 'package:news_app/core/theme/light_colors.dart';
 import 'package:news_app/features/auth/register_screen.dart';
@@ -8,7 +9,7 @@ import '../../core/widgets/custom_text_form_field.dart';
 import '../main/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -69,39 +70,33 @@ class _LoginScreenState extends State<LoginScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/background.png'),
-          ),
+          image: DecorationImage(image: AssetImage('assets/images/background.png')),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding:  EdgeInsets.all(AppSizes.r16),
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(
-                  child: Image.asset('assets/images/logo.png', height: 45),
-                ),
-                SizedBox(height: 24),
+                Center(child: Image.asset('assets/images/logo.png', height: AppSizes.h45)),
+                SizedBox(height: AppSizes.ph24),
                 Text(
                   'Welcome To Newst',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: AppSizes.sp20,
                     fontWeight: FontWeight.w700,
                     color: LightColors.unselectedItemColor,
                   ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: AppSizes.ph16),
                 CustomTextFormField(
                   controller: emailController,
                   hintText: 'abdoo@gmail.com',
                   title: 'Email',
                   validator: (value) {
-                    RegExp emailRegex = RegExp(
-                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                    );
+                    RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                     if (value == null || value.isEmpty) {
                       return 'Email is required';
                     }
@@ -111,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: AppSizes.ph16),
                 CustomTextFormField(
                   controller: passwordController,
                   hintText: '*************',
@@ -132,12 +127,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       errorMessage!,
                       style: TextStyle(
                         color: Colors.red,
-                        fontSize: 16,
+                        fontSize: AppSizes.sp16,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
-                SizedBox(height: 20),
+                SizedBox(height: AppSizes.ph20),
                 isLoading
                     ? Center(child: CircularProgressIndicator())
                     : CustomElevatedButton(
@@ -148,19 +143,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       },
                     ),
-                SizedBox(height: 24),
+                SizedBox(height: AppSizes.ph24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'Don’t have an account ?',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: AppSizes.sp14,
                         fontWeight: FontWeight.w400,
                         color: LightColors.textPrimaryColor,
                       ),
                     ),
-                    SizedBox(width: 8),
+                    SizedBox(width: AppSizes.pw8),
                     InkWell(
                       onTap: () {
                         Navigator.push(
@@ -177,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           color: LightColors.primaryColor,
                           fontWeight: FontWeight.w400,
-                          fontSize: 14,
+                          fontSize: AppSizes.sp14,
                         ),
                       ),
                     ),

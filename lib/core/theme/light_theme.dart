@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/theme/light_colors.dart';
 
 ThemeData lightTheme = ThemeData(
@@ -8,7 +9,7 @@ ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: Color(0xfff5f5f5),
   appBarTheme: AppBarThemeData(
     backgroundColor: Colors.white,
-    titleTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF141414)),
+    titleTextStyle: TextStyle(fontSize: AppSizes.sp16, fontWeight: FontWeight.w700, color: Color(0xFF141414)),
   ),
 
   textButtonTheme: TextButtonThemeData(
@@ -18,7 +19,7 @@ ThemeData lightTheme = ThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: LightColors.primaryColor,
       foregroundColor: Color(0xfff5f5f5),
-      textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+      textStyle: TextStyle(fontSize: AppSizes.sp16, fontWeight: FontWeight.w500),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
     ),
   ),
@@ -35,7 +36,7 @@ ThemeData lightTheme = ThemeData(
 
     hintStyle: TextStyle(
       fontWeight: FontWeight.w400,
-      fontSize: 12,
+      fontSize: AppSizes.sp12,
       color: LightColors.unselectedItemColor,
     ),
     border: InputBorder.none,

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/widgets/custom_cached_network_image.dart';
 import 'package:news_app/features/home/models/news_article_model.dart';
 
@@ -12,14 +13,14 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.ph16, vertical: AppSizes.pw8),
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(AppSizes.r8),
             child: CustomCachedNetworkImage(imagePath: model.urlToImage ?? ""),
           ),
-          SizedBox(width: 8),
+          SizedBox(width: AppSizes.pw8),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,7 +31,7 @@ class NewsItem extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: AppSizes.sp16,
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF141414),
                   ),
@@ -39,25 +40,25 @@ class NewsItem extends StatelessWidget {
                   children: [
                     if (model.urlToImage != null)
                       CircleAvatar(
-                        radius: 10,
+                        radius: AppSizes.r10,
                         backgroundImage: NetworkImage(model.urlToImage ?? ""),
                       ),
-                    SizedBox(width: 6),
+                    SizedBox(width: AppSizes.pw6),
                     Text(
                       (model.author ?? "").substring(0, min((model.author ?? "").length, 10)),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: AppSizes.sp12,
                         fontWeight: FontWeight.w400,
                         color: Color(0xFF141414),
                       ),
                     ),
-                    SizedBox(width: 8),
+                    SizedBox(width: AppSizes.pw8),
                     Text(
                       model.formatDateTime(),
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: AppSizes.sp14,
                         fontWeight: FontWeight.w400,
                         color: Color(0xff363636),
                       ),
