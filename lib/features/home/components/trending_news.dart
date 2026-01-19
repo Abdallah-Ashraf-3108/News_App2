@@ -23,7 +23,10 @@ class TrendingNews extends StatelessWidget {
             SizedBox(
               height: AppSizes.h240,
               width: double.infinity,
-              child: Image.asset('assets/images/home_background.png', fit: BoxFit.cover),
+              child: Image.asset(
+                'assets/images/home_background.png',
+                fit: BoxFit.cover,
+              ),
             ),
             Positioned.fill(
               top: AppSizes.ph60,
@@ -44,30 +47,41 @@ class TrendingNews extends StatelessWidget {
                   SizedBox(
                     height: AppSizes.h140,
                     child: Consumer<HomeController>(
-                      builder: (BuildContext context, HomeController controller, Widget? child) {
+                      builder: (
+                        BuildContext context,
+                        HomeController controller,
+                        Widget? child,
+                      ) {
                         switch (controller.everythingStatus) {
                           case RequestStatusEnum.loading:
                             return TrendingNewsShimmer();
                           case RequestStatusEnum.error:
-                            return Center(child: Text(controller.errorMessage!));
+                            return Center(
+                              child: Text(controller.errorMessage!),
+                            );
                           case RequestStatusEnum.loaded:
                             return ListView.separated(
                               padding: EdgeInsets.only(left: AppSizes.pw16),
                               scrollDirection: Axis.horizontal,
-                              itemCount: controller.newsEverythingList.take(10).length,
+                              itemCount:
+                                  controller.newsEverythingList.take(10).length,
                               separatorBuilder:
                                   (BuildContext context, int index) =>
                                       SizedBox(width: AppSizes.pw12),
                               itemBuilder: (BuildContext context, int index) {
-                                final modelEverything = controller.newsEverythingList[index];
+                                final modelEverything =
+                                    controller.newsEverythingList[index];
                                 return SizedBox(
                                   width: AppSizes.w240,
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(AppSizes.r12),
+                                    borderRadius: BorderRadius.circular(
+                                      AppSizes.r12,
+                                    ),
                                     child: Stack(
                                       children: [
                                         CustomCachedNetworkImage(
-                                          imagePath: modelEverything.urlToImage ?? "",
+                                          imagePath:
+                                              modelEverything.urlToImage ?? "",
                                           width: AppSizes.w240,
                                           height: AppSizes.h140,
                                         ),
@@ -78,8 +92,12 @@ class TrendingNews extends StatelessWidget {
                                                 begin: Alignment.topCenter,
                                                 end: Alignment.bottomCenter,
                                                 colors: [
-                                                  Colors.black.withValues(alpha: 0.1),
-                                                  Colors.black.withValues(alpha: 0.9),
+                                                  Colors.black.withValues(
+                                                    alpha: 0.1,
+                                                  ),
+                                                  Colors.black.withValues(
+                                                    alpha: 0.9,
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -90,8 +108,10 @@ class TrendingNews extends StatelessWidget {
                                           right: AppSizes.pw12,
                                           left: AppSizes.pw12,
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 modelEverything.title!,
@@ -101,7 +121,9 @@ class TrendingNews extends StatelessWidget {
                                                 style: TextStyle(
                                                   fontSize: AppSizes.sp14,
                                                   fontWeight: FontWeight.w700,
-                                                  color: LightColors.backgroundColor,
+                                                  color:
+                                                      LightColors
+                                                          .backgroundColor,
                                                 ),
                                               ),
                                               SizedBox(height: AppSizes.ph4),
@@ -109,29 +131,40 @@ class TrendingNews extends StatelessWidget {
                                                 children: [
                                                   CircleAvatar(
                                                     radius: AppSizes.r10,
-                                                    backgroundImage: NetworkImage(
-                                                      modelEverything.urlToImage ?? "",
-                                                    ),
+                                                    backgroundImage:
+                                                        NetworkImage(
+                                                          modelEverything
+                                                                  .urlToImage ??
+                                                              "",
+                                                        ),
                                                   ),
                                                   SizedBox(width: 6),
                                                   Expanded(
                                                     child: Text(
-                                                      modelEverything.author ?? "",
+                                                      modelEverything.author ??
+                                                          "",
                                                       style: TextStyle(
                                                         fontSize: AppSizes.sp12,
-                                                        fontWeight: FontWeight.w400,
-                                                        color: LightColors.backgroundColor,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color:
+                                                            LightColors
+                                                                .backgroundColor,
                                                       ),
                                                       maxLines: 1,
                                                     ),
                                                   ),
                                                   Spacer(),
                                                   Text(
-                                                    modelEverything.formatDateTime(),
+                                                    modelEverything
+                                                        .formatDateTime(),
                                                     style: TextStyle(
                                                       fontSize: AppSizes.sp14,
-                                                      fontWeight: FontWeight.w400,
-                                                      color: LightColors.backgroundColor,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color:
+                                                          LightColors
+                                                              .backgroundColor,
                                                     ),
                                                   ),
                                                 ],

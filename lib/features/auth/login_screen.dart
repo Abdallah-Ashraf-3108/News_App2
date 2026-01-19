@@ -3,7 +3,6 @@ import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/datasource/local_data/preference_manager.dart';
 import 'package:news_app/core/theme/light_colors.dart';
 import 'package:news_app/features/auth/register_screen.dart';
-
 import '../../core/widgets/custom_elevated_button.dart';
 import '../../core/widgets/custom_text_form_field.dart';
 import '../main/main_screen.dart';
@@ -70,17 +69,24 @@ class _LoginScreenState extends State<LoginScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/images/background.png')),
+          image: DecorationImage(
+            image: AssetImage('assets/images/background.png'),
+          ),
         ),
         child: Padding(
-          padding:  EdgeInsets.all(AppSizes.r16),
+          padding: EdgeInsets.all(AppSizes.r16),
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(child: Image.asset('assets/images/logo.png', height: AppSizes.h45)),
+                Center(
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    height: AppSizes.h45,
+                  ),
+                ),
                 SizedBox(height: AppSizes.ph24),
                 Text(
                   'Welcome To Newst',
@@ -96,7 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: 'abdoo@gmail.com',
                   title: 'Email',
                   validator: (value) {
-                    RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                    RegExp emailRegex = RegExp(
+                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                    );
                     if (value == null || value.isEmpty) {
                       return 'Email is required';
                     }

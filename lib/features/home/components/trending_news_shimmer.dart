@@ -11,14 +11,19 @@ class TrendingNewsShimmer extends StatelessWidget {
       padding: EdgeInsets.only(left: AppSizes.pw16),
       scrollDirection: Axis.horizontal,
       itemCount: 6,
-      separatorBuilder: (BuildContext context, int index) => SizedBox(width: AppSizes.pw12),
+      separatorBuilder:
+          (BuildContext context, int index) => SizedBox(width: AppSizes.pw12),
       itemBuilder: (BuildContext context, int index) {
         return Shimmer.fromColors(
           baseColor: Colors.grey.shade300,
           highlightColor: Colors.grey.shade100,
           child: ClipRRect(
             borderRadius: BorderRadiusGeometry.circular(12),
-            child: Container(width: AppSizes.w240, height: AppSizes.h140, color: Colors.white),
+            child: Container(
+              width: AppSizes.w240,
+              height: AppSizes.h140,
+              color: Colors.white,
+            ),
           ),
         );
       },

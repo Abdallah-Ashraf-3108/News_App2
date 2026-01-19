@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/constants/app_sizes.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
@@ -36,7 +37,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         children: [
           Text(
             widget.title ?? "",
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: AppSizes.sp16),
           ),
           TextFormField(
             maxLines: widget.maxLines,

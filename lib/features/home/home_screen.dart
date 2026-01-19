@@ -1,12 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:news_app/features/home/categories_screen.dart';
 import 'package:news_app/features/home/components/categories_list.dart';
 import 'package:news_app/features/home/components/top_headlines.dart';
 import 'package:news_app/features/home/components/view_all_component.dart';
+import 'package:news_app/features/home/repo/news_repo.dart';
 import 'package:provider/provider.dart';
-
 import 'components/trending_news.dart';
 import 'controller/home_controller.dart';
 
@@ -16,9 +14,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomeController>(
-      create: (BuildContext context) => HomeController(),
+      create: (BuildContext context) => HomeController(NewsRepo()),
       child: Consumer<HomeController>(
-        builder: (BuildContext context, HomeController controller, Widget? child) {
+        builder: (
+          BuildContext context,
+          HomeController controller,
+          Widget? child,
+        ) {
           return Scaffold(
             body: CustomScrollView(
               slivers: [
@@ -33,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                         MaterialPageRoute(
                           builder:
                               (_) => ChangeNotifierProvider(
-                                create: (_) => HomeController(),
+                                create: (_) => HomeController(NewsRepo()),
                                 child: const CategoriesScreen(),
                               ),
                         ),
