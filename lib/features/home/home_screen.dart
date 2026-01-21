@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/datasource/remote_data/api_service.dart';
 import 'package:news_app/features/home/categories_screen.dart';
 import 'package:news_app/features/home/components/categories_list.dart';
 import 'package:news_app/features/home/components/top_headlines.dart';
 import 'package:news_app/features/home/components/view_all_component.dart';
-import 'package:news_app/features/home/repo/news_repo.dart';
+import 'package:news_app/core/repo/news_repo.dart';
 import 'package:provider/provider.dart';
 import 'components/trending_news.dart';
 import 'controller/home_controller.dart';
@@ -14,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomeController>(
-      create: (BuildContext context) => HomeController(NewsRepo()),
+      create: (BuildContext context) => HomeController(NewsRepo(ApiService())),
       child: Consumer<HomeController>(
         builder: (
           BuildContext context,
@@ -35,7 +36,9 @@ class HomeScreen extends StatelessWidget {
                         MaterialPageRoute(
                           builder:
                               (_) => ChangeNotifierProvider(
-                                create: (_) => HomeController(NewsRepo()),
+                                create:
+                                    (_) =>
+                                        HomeController(NewsRepo(ApiService())),
                                 child: const CategoriesScreen(),
                               ),
                         ),

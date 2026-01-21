@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:news_app/features/home/repo/news_repo.dart';
+import 'package:news_app/core/mixins/safe_notify_mixin.dart';
+import 'package:news_app/core/repo/news_repo.dart';
 import '../../../core/enums/request_status_enum.dart';
 import '../models/news_article_model.dart';
 
-class HomeController extends ChangeNotifier {
+class HomeController extends ChangeNotifier with SafeNotifyMixin {
   HomeController(this.newsRepo) {
     getTopHeadlines();
     getEverything();
@@ -14,14 +15,14 @@ class HomeController extends ChangeNotifier {
 
   List<NewsArticleModel> newsTopHeadlinesList = [];
   List<NewsArticleModel> newsEverythingList = [];
-  final NewsRepo newsRepo;
+  final BaseNewsRepo newsRepo;
   String? errorMessage;
   String? selectedCategory;
 
   void getTopHeadlines({String? category}) async {
     try {
       topHeadlinesStatus = RequestStatusEnum.loading;
-      notifyListeners();
+      safeNotify();
 
       newsTopHeadlinesList = await newsRepo.getTopHeadlines(
         selectedCategory: selectedCategory,
@@ -32,7 +33,7 @@ class HomeController extends ChangeNotifier {
       errorMessage = e.toString();
       topHeadlinesStatus = RequestStatusEnum.error;
     }
-    notifyListeners();
+    safeNotify();
   }
 
   void getEverything() async {
@@ -45,12 +46,12 @@ class HomeController extends ChangeNotifier {
       errorMessage = e.toString();
       everythingStatus = RequestStatusEnum.error;
     }
-    notifyListeners();
+    safeNotify();
   }
 
   void updateSelectedCategory(String category) {
     selectedCategory = category;
     getTopHeadlines(category: selectedCategory);
-    notifyListeners();
+    safeNotify();
   }
 }
