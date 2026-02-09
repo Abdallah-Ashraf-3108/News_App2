@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/enums/request_status_enum.dart';
 import 'package:news_app/core/widgets/custom_cached_network_image.dart';
+import 'package:news_app/features/details/news_details_screen.dart';
 import 'package:news_app/features/home/components/trending_news_shimmer.dart';
 import 'package:news_app/features/home/components/view_all_component.dart';
 import 'package:news_app/features/home/controller/home_controller.dart';
@@ -71,108 +72,124 @@ class TrendingNews extends StatelessWidget {
                               itemBuilder: (BuildContext context, int index) {
                                 final modelEverything =
                                     controller.newsEverythingList[index];
-                                return SizedBox(
-                                  width: AppSizes.w240,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(
-                                      AppSizes.r12,
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        CustomCachedNetworkImage(
-                                          imagePath:
-                                              modelEverything.urlToImage ?? "",
-                                          width: AppSizes.w240,
-                                          height: AppSizes.h140,
-                                        ),
-                                        Positioned.fill(
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                begin: Alignment.topCenter,
-                                                end: Alignment.bottomCenter,
-                                                colors: [
-                                                  Colors.black.withValues(
-                                                    alpha: 0.1,
-                                                  ),
-                                                  Colors.black.withValues(
-                                                    alpha: 0.9,
-                                                  ),
-                                                ],
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                          return NewsDetailsScreen(model:modelEverything);
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  child: SizedBox(
+                                    width: AppSizes.w240,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                        AppSizes.r12,
+                                      ),
+                                      child: Stack(
+                                        children: [
+                                          CustomCachedNetworkImage(
+                                            imagePath:
+                                                modelEverything.urlToImage ??
+                                                "",
+                                            width: AppSizes.w240,
+                                            height: AppSizes.h140,
+                                          ),
+                                          Positioned.fill(
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  begin: Alignment.topCenter,
+                                                  end: Alignment.bottomCenter,
+                                                  colors: [
+                                                    Colors.black.withValues(
+                                                      alpha: 0.1,
+                                                    ),
+                                                    Colors.black.withValues(
+                                                      alpha: 0.9,
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        Positioned(
-                                          bottom: AppSizes.ph12,
-                                          right: AppSizes.pw12,
-                                          left: AppSizes.pw12,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                modelEverything.title!,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.start,
-                                                style: TextStyle(
-                                                  fontSize: AppSizes.sp14,
-                                                  fontWeight: FontWeight.w700,
-                                                  color:
-                                                      LightColors
-                                                          .backgroundColor,
-                                                ),
-                                              ),
-                                              SizedBox(height: AppSizes.ph4),
-                                              Row(
-                                                children: [
-                                                  CircleAvatar(
-                                                    radius: AppSizes.r10,
-                                                    backgroundImage:
-                                                        NetworkImage(
-                                                          modelEverything
-                                                                  .urlToImage ??
-                                                              "",
-                                                        ),
+                                          Positioned(
+                                            bottom: AppSizes.ph12,
+                                            right: AppSizes.pw12,
+                                            left: AppSizes.pw12,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  modelEverything.title!,
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.start,
+                                                  style: TextStyle(
+                                                    fontSize: AppSizes.sp14,
+                                                    fontWeight: FontWeight.w700,
+                                                    color:
+                                                        LightColors
+                                                            .backgroundColor,
                                                   ),
-                                                  SizedBox(width: 6),
-                                                  Expanded(
-                                                    child: Text(
-                                                      modelEverything.author ??
-                                                          "",
+                                                ),
+                                                SizedBox(height: AppSizes.ph4),
+                                                Row(
+                                                  children: [
+                                                    CircleAvatar(
+                                                      radius: AppSizes.r10,
+                                                      backgroundImage:
+                                                          NetworkImage(
+                                                            modelEverything
+                                                                    .urlToImage ??
+                                                                "",
+                                                          ),
+                                                    ),
+                                                    SizedBox(width: 6),
+                                                    Expanded(
+                                                      child: Text(
+                                                        modelEverything
+                                                                .author ??
+                                                            "",
+                                                        style: TextStyle(
+                                                          fontSize:
+                                                              AppSizes.sp12,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color:
+                                                              LightColors
+                                                                  .backgroundColor,
+                                                        ),
+                                                        maxLines: 1,
+                                                      ),
+                                                    ),
+                                                    Spacer(),
+                                                    Text(
+                                                      modelEverything
+                                                          .formatDateTime(),
                                                       style: TextStyle(
-                                                        fontSize: AppSizes.sp12,
+                                                        fontSize: AppSizes.sp14,
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         color:
                                                             LightColors
                                                                 .backgroundColor,
                                                       ),
-                                                      maxLines: 1,
                                                     ),
-                                                  ),
-                                                  Spacer(),
-                                                  Text(
-                                                    modelEverything
-                                                        .formatDateTime(),
-                                                    style: TextStyle(
-                                                      fontSize: AppSizes.sp14,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color:
-                                                          LightColors
-                                                              .backgroundColor,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );

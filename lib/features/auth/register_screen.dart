@@ -79,9 +79,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           padding: EdgeInsets.all(AppSizes.r16),
           child: Form(
             key: _formKey,
-            child: SingleChildScrollView(
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height,
+            child: Center(
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,

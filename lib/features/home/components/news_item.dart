@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/widgets/custom_cached_network_image.dart';
+import 'package:news_app/features/details/news_details_screen.dart';
 import 'package:news_app/features/home/models/news_article_model.dart';
 
 class NewsItem extends StatelessWidget {
@@ -13,64 +14,84 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.ph16, vertical: AppSizes.pw8),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(AppSizes.r8),
-            child: CustomCachedNetworkImage(imagePath: model.urlToImage ?? ""),
-          ),
-          SizedBox(width: AppSizes.pw8),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  model.title ?? "",
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: AppSizes.sp16,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xFF141414),
-                  ),
-                ),
-                Row(
-                  children: [
-                    if (model.urlToImage != null)
-                      CircleAvatar(
-                        radius: AppSizes.r10,
-                        backgroundImage: NetworkImage(model.urlToImage ?? ""),
-                      ),
-                    SizedBox(width: AppSizes.pw6),
-                    Text(
-                      (model.author ?? "").substring(0, min((model.author ?? "").length, 10)),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: AppSizes.sp12,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF141414),
-                      ),
-                    ),
-                    SizedBox(width: AppSizes.pw8),
-                    Text(
-                      model.formatDateTime(),
-                      style: TextStyle(
-                        fontSize: AppSizes.sp14,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff363636),
-                      ),
-                    ),
-                    Spacer(),
-                    SvgPicture.asset('assets/icons/bookmarkIcon.svg'),
-                  ],
-                ),
-              ],
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSizes.ph16,
+        vertical: AppSizes.pw8,
+      ),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return NewsDetailsScreen(model: model);
+              },
             ),
-          ),
-        ],
+          );
+        },
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(AppSizes.r8),
+              child: CustomCachedNetworkImage(
+                imagePath: model.urlToImage ?? "",
+              ),
+            ),
+            SizedBox(width: AppSizes.pw8),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    model.title ?? "",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: AppSizes.sp16,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF141414),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      if (model.urlToImage != null)
+                        CircleAvatar(
+                          radius: AppSizes.r10,
+                          backgroundImage: NetworkImage(model.urlToImage ?? ""),
+                        ),
+                      SizedBox(width: AppSizes.pw6),
+                      Text(
+                        (model.author ?? "").substring(
+                          0,
+                          min((model.author ?? "").length, 10),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: AppSizes.sp12,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFF141414),
+                        ),
+                      ),
+                      SizedBox(width: AppSizes.pw8),
+                      Text(
+                        model.formatDateTime(),
+                        style: TextStyle(
+                          fontSize: AppSizes.sp14,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xff363636),
+                        ),
+                      ),
+                      Spacer(),
+                      SvgPicture.asset('assets/icons/bookmarkIcon.svg'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

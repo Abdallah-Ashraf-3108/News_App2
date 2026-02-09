@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/core/constants/app_sizes.dart';
 import 'package:news_app/core/datasource/remote_data/api_service.dart';
 import 'package:news_app/core/repo/news_repo.dart';
+import 'package:news_app/features/details/news_details_screen.dart';
 import 'package:news_app/features/search/controller/search_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -64,6 +65,16 @@ class SearchScreen extends StatelessWidget {
                               final model =
                                   controller.newsEverythingList[index];
                               return ListTile(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                        return NewsDetailsScreen(model: model);
+                                      },
+                                    ),
+                                  );
+                                },
                                 leading: Icon(
                                   Icons.search,
                                   size: AppSizes.r20,

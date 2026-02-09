@@ -77,116 +77,120 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: EdgeInsets.all(AppSizes.r16),
           child: Form(
             key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    height: AppSizes.h45,
-                  ),
-                ),
-                SizedBox(height: AppSizes.ph24),
-                Text(
-                  'Welcome To Newst',
-                  style: TextStyle(
-                    fontSize: AppSizes.sp20,
-                    fontWeight: FontWeight.w700,
-                    color: LightColors.unselectedItemColor,
-                  ),
-                ),
-                SizedBox(height: AppSizes.ph16),
-                CustomTextFormField(
-                  controller: emailController,
-                  hintText: 'abdoo@gmail.com',
-                  title: 'Email',
-                  validator: (value) {
-                    RegExp emailRegex = RegExp(
-                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                    );
-                    if (value == null || value.isEmpty) {
-                      return 'Email is required';
-                    }
-                    if (!emailRegex.hasMatch(value)) {
-                      return 'Enter a valid email';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: AppSizes.ph16),
-                CustomTextFormField(
-                  controller: passwordController,
-                  hintText: '*************',
-                  title: 'Password',
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Password is required';
-                    }
-
-                    return null;
-                  },
-                ),
-                if (errorMessage != null)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      errorMessage!,
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: AppSizes.sp16,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                SizedBox(height: AppSizes.ph20),
-                isLoading
-                    ? Center(child: CircularProgressIndicator())
-                    : CustomElevatedButton(
-                      text: 'Sign In',
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          login();
-                        }
-                      },
-                    ),
-                SizedBox(height: AppSizes.ph24),
-                Row(
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Don’t have an account ?",
-                      style: TextStyle(
-                        fontSize: AppSizes.sp14,
-                        fontWeight: FontWeight.w400,
-                        color: LightColors.textPrimaryColor,
+                    Center(
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        height: AppSizes.h45,
                       ),
                     ),
-                    SizedBox(width: AppSizes.pw8),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return RegisterScreen();
-                            },
-                          ),
+                    SizedBox(height: AppSizes.ph24),
+                    Text(
+                      'Welcome To Newst',
+                      style: TextStyle(
+                        fontSize: AppSizes.sp20,
+                        fontWeight: FontWeight.w700,
+                        color: LightColors.unselectedItemColor,
+                      ),
+                    ),
+                    SizedBox(height: AppSizes.ph16),
+                    CustomTextFormField(
+                      controller: emailController,
+                      hintText: 'abdoo@gmail.com',
+                      title: 'Email',
+                      validator: (value) {
+                        RegExp emailRegex = RegExp(
+                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                         );
+                        if (value == null || value.isEmpty) {
+                          return 'Email is required';
+                        }
+                        if (!emailRegex.hasMatch(value)) {
+                          return 'Enter a valid email';
+                        }
+                        return null;
                       },
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: LightColors.primaryColor,
-                          fontWeight: FontWeight.w400,
-                          fontSize: AppSizes.sp14,
+                    ),
+                    SizedBox(height: AppSizes.ph16),
+                    CustomTextFormField(
+                      controller: passwordController,
+                      hintText: '*************',
+                      title: 'Password',
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Password is required';
+                        }
+
+                        return null;
+                      },
+                    ),
+                    if (errorMessage != null)
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          errorMessage!,
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: AppSizes.sp16,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
+                    SizedBox(height: AppSizes.ph20),
+                    isLoading
+                        ? Center(child: CircularProgressIndicator())
+                        : CustomElevatedButton(
+                          text: 'Sign In',
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              login();
+                            }
+                          },
+                        ),
+                    SizedBox(height: AppSizes.ph24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don’t have an account ?",
+                          style: TextStyle(
+                            fontSize: AppSizes.sp14,
+                            fontWeight: FontWeight.w400,
+                            color: LightColors.textPrimaryColor,
+                          ),
+                        ),
+                        SizedBox(width: AppSizes.pw8),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return RegisterScreen();
+                                },
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              color: LightColors.primaryColor,
+                              fontWeight: FontWeight.w400,
+                              fontSize: AppSizes.sp14,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
